@@ -12,7 +12,6 @@
             --accent-blue: #00d2ff;
             --deep-blue: #3a7bd5;
             --text-main: #e0e0e0;
-            --disabled-gray: #4a5568;
         }
 
         body {
@@ -27,10 +26,24 @@
             overflow-x: hidden;
         }
 
+        /* ИСПРАВЛЕНИЕ: Свечение больше не перекрывает карточки */
+        .glow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: var(--accent-blue);
+            filter: blur(180px);
+            opacity: 0.1;
+            z-index: -1;
+            top: -100px;
+            pointer-events: none; /* Пропускает клики сквозь себя */
+        }
+
         header {
             margin-top: 60px;
             text-align: center;
             margin-bottom: 40px;
+            z-index: 1;
         }
 
         h1 {
@@ -39,15 +52,15 @@
             background: linear-gradient(to right, #00d2ff, #3a7bd5);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
+            margin: 0;
         }
 
         .subtitle {
             color: #627d98;
             font-size: 1.1rem;
+            margin-top: 10px;
         }
 
-        /* Grid Layout */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -55,9 +68,11 @@
             width: 90%;
             max-width: 900px;
             padding-bottom: 50px;
+            z-index: 2;
         }
 
         .project-card {
+            position: relative;
             background: var(--card-bg);
             backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -70,84 +85,69 @@
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .project-card:hover:not(.disabled-card) {
+        .project-card:hover {
             transform: translateY(-12px);
             border-color: var(--accent-blue);
-            box-shadow: 0 0 30px rgba(0, 210, 255, 0.15);
+            box-shadow: 0 15px 35px rgba(0, 210, 255, 0.15);
+        }
+
+        /* Красивая метка Beta */
+        .beta-badge {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            background: linear-gradient(135deg, rgba(0, 210, 255, 0.2), rgba(58, 123, 213, 0.2));
+            color: var(--accent-blue);
+            border: 1px solid rgba(0, 210, 255, 0.4);
+            padding: 4px 14px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
         .icon-box {
-            width: 60px;
-            height: 60px;
+            width: 65px;
+            height: 65px;
             background: linear-gradient(135deg, var(--accent-blue), var(--deep-blue));
-            border-radius: 16px;
-            margin: 0 auto 20px;
+            border-radius: 18px;
+            margin: 0 auto 25px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
-            box-shadow: 0 8px 15px rgba(0, 210, 255, 0.2);
-        }
-
-        /* Icon for the coming soon project */
-        .icon-box.gray {
-            background: linear-gradient(135deg, #2d3748, #1a202c);
-            box-shadow: none;
-            filter: grayscale(1);
+            font-size: 30px;
+            box-shadow: 0 8px 20px rgba(0, 210, 255, 0.3);
         }
 
         .project-title {
-            font-size: 1.6rem;
+            font-size: 1.7rem;
             margin-bottom: 15px;
             color: #fff;
         }
 
         .project-description {
             color: #9fb3c8;
-            margin-bottom: 30px;
-            line-height: 1.5;
+            margin-bottom: 35px;
+            line-height: 1.6;
             font-size: 0.95rem;
         }
 
-        /* Active Button */
         .btn {
             display: inline-block;
             background: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%);
             color: white;
-            padding: 14px 20px;
+            padding: 16px 24px;
             text-decoration: none;
-            border-radius: 12px;
-            font-weight: 600;
-            transition: transform 0.2s ease, opacity 0.3s ease;
+            border-radius: 14px;
+            font-weight: 700;
+            transition: all 0.3s ease;
         }
 
         .btn:hover {
-            transform: scale(1.03);
-            opacity: 0.9;
-        }
-
-        /* Disabled Button */
-        .btn-disabled {
-            background: #2d3748;
-            color: #718096;
-            cursor: not-allowed;
-            pointer-events: none; /* Makes it unclickable */
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .disabled-card {
-            opacity: 0.7;
-        }
-
-        .glow {
-            position: absolute;
-            width: 400px;
-            height: 400px;
-            background: var(--accent-blue);
-            filter: blur(180px);
-            opacity: 0.08;
-            z-index: -1;
-            top: 10%;
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(58, 123, 213, 0.4);
         }
     </style>
 </head>
@@ -172,15 +172,16 @@
             <a href="https://ogurec3000.github.io/clock/" class="btn" target="_blank">Open Application</a>
         </div>
 
-        <div class="project-card disabled-card">
+        <div class="project-card">
+            <span class="beta-badge">Beta</span>
             <div>
-                <div class="icon-box gray">⏳</div>
-                <h2 class="project-title">Focus Timer</h2>
+                <div class="icon-box">📊</div>
+                <h2 class="project-title">Dashboard</h2>
                 <p class="project-description">
-                    A productivity tool to help you track tasks and manage your time effectively.
+                    A comprehensive overview of your metrics and system performance in real-time.
                 </p>
             </div>
-            <a href="#" class="btn btn-disabled">COMING SOON</a>
+            <a href="https://ogurec3000.github.io/dashboard/" class="btn" target="_blank">Open Dashboard</a>
         </div>
     </main>
 
