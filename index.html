@@ -26,7 +26,6 @@
             overflow-x: hidden;
         }
 
-        /* ИСПРАВЛЕНИЕ: Свечение больше не перекрывает карточки */
         .glow {
             position: fixed;
             width: 600px;
@@ -36,7 +35,7 @@
             opacity: 0.1;
             z-index: -1;
             top: -100px;
-            pointer-events: none; /* Пропускает клики сквозь себя */
+            pointer-events: none;
         }
 
         header {
@@ -91,14 +90,11 @@
             box-shadow: 0 15px 35px rgba(0, 210, 255, 0.15);
         }
 
-        /* Красивая метка Beta */
-        .beta-badge {
+        /* Общий стиль для бейджей */
+        .badge {
             position: absolute;
             top: 20px;
             right: 25px;
-            background: linear-gradient(135deg, rgba(0, 210, 255, 0.2), rgba(58, 123, 213, 0.2));
-            color: var(--accent-blue);
-            border: 1px solid rgba(0, 210, 255, 0.4);
             padding: 4px 14px;
             border-radius: 12px;
             font-size: 0.7rem;
@@ -106,6 +102,21 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Стиль для версии V1.2 */
+        .version-badge {
+            background: rgba(58, 123, 213, 0.2);
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Стиль для Beta */
+        .beta-badge {
+            background: rgba(0, 210, 255, 0.15);
+            color: var(--accent-blue);
+            border-color: var(--accent-blue);
         }
 
         .icon-box {
@@ -157,11 +168,12 @@
 
     <header>
         <h1>ogurec3000 Projects</h1>
-        <p class="subtitle">My Digital Workspace</p>
+        <p class="subtitle">My Projects</p>
     </header>
 
     <main class="projects-grid">
         <div class="project-card">
+            <span class="badge version-badge">V1.2</span>
             <div>
                 <div class="icon-box">🕒</div>
                 <h2 class="project-title">Smart Clock</h2>
@@ -173,7 +185,7 @@
         </div>
 
         <div class="project-card">
-            <span class="beta-badge">Beta</span>
+            <span class="badge beta-badge">Beta</span>
             <div>
                 <div class="icon-box">📊</div>
                 <h2 class="project-title">Dashboard</h2>
