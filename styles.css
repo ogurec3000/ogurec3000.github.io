@@ -1,0 +1,207 @@
+/* ==========================================
+   1. ПЕРЕМЕННЫЕ (Настройки цветов и анимаций)
+   ========================================== */
+:root {
+    --bg-color: #050a18;
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --accent-blue: #00d2ff;
+    --deep-blue: #3a7bd5;
+    --text-main: #e0e0e0;
+    /* Плавный переход с эффектом "пружины" */
+    --transition-bounce: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* ==========================================
+   2. БАЗОВЫЕ СТИЛИ (Фон и общие правила)
+   ========================================== */
+body {
+    font-family: 'Inter', sans-serif;
+    background: radial-gradient(circle at top center, #102a43 0%, #050a18 100%);
+    color: var(--text-main);
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden;
+}
+
+/* Фоновое декоративное свечение */
+.glow {
+    position: fixed;
+    top: -100px;
+    width: 600px;
+    height: 600px;
+    background: var(--accent-blue);
+    filter: blur(180px);
+    opacity: 0.1;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* ==========================================
+   3. ШАПКА (Заголовок страницы)
+   ========================================== */
+header {
+    margin: 60px 0 40px;
+    text-align: center;
+    z-index: 1;
+}
+
+h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin: 0;
+    background: linear-gradient(to right, var(--accent-blue), var(--deep-blue));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+    color: #627d98;
+    font-size: 1.1rem;
+    margin-top: 10px;
+}
+
+/* ==========================================
+   4. СЕТКА (Расположение карточек)
+   ========================================== */
+.projects-grid {
+    display: grid;
+    /* Автоматически подстраивает колонки под ширину экрана */
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    width: 90%;
+    max-width: 900px;
+    padding-bottom: 50px;
+    z-index: 2;
+}
+
+/* ==========================================
+   5. КАРТОЧКА ПРОЕКТА
+   ========================================== */
+.project-card {
+    padding: 40px;
+    background: var(--card-bg);
+    backdrop-filter: blur(12px); /* Эффект матового стекла */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: var(--transition-bounce);
+    top:60px;
+}
+
+/* Эффект при наведении на карточку */
+.project-card:hover {
+    transform: translateY(-12px);
+    border-color: var(--accent-blue);
+    box-shadow: 0 15px 35px rgba(0, 210, 255, 0.15);
+}
+
+/* Иконка в кружочке */
+.icon-box {
+    width: 65px;
+    height: 65px;
+    margin: 0 auto 25px;
+    background: linear-gradient(135deg, var(--accent-blue), var(--deep-blue));
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    box-shadow: 0 8px 20px rgba(0, 210, 255, 0.3);
+    user-select: none;
+}
+
+.project-title {
+    font-size: 1.7rem;
+    color: #fff;
+    margin-bottom: 15px;
+    user-select: none;
+}
+
+.project-description {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #9fb3c8;
+    margin-bottom: 35px;
+    user-select: none;
+}
+
+/* ==========================================
+   6. КНОПКИ И БЕЙДЖИ
+   ========================================== */
+.btn {
+    display: inline-block;
+    padding: 16px 24px;
+    background: linear-gradient(135deg, var(--accent-blue), var(--deep-blue));
+    color: white;
+    text-decoration: none;
+    border-radius: 14px;
+    font-weight: 700;
+    transition: 0.3s ease;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(58, 123, 213, 0.4);
+}
+
+/* Бейдж (версия или статус) в углу */
+.badge {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    padding: 4px 14px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 1px solid rgb(153, 168, 255);
+    user-select: none;
+}
+
+    .badge-new {
+position: absolute;
+top: -20px;      /* Немного отступаем от верха */
+right: -30px;   /* Выносим за край, чтобы создать наклон */
+width: 70px;   /* Фиксированная ширина для наклона */
+height: 15px;
+padding: 6px 0; /* Вертикальные отступы */
+border-radius: 20px;
+background: #07c9e2; /* Тот самый яркий желтый */
+box-shadow: 0 0 10px rgb(97, 181, 192); /* Легкое свечение */
+font-size: 0.75rem;
+font-weight: 900;
+text-transform: uppercase;
+text-align: center;
+letter-spacing: 4px;
+filter: drop-shadow(0 0 10px rgba(121, 212, 212, 0.815));   
+filter: glow(0 0 10px rgba(121, 212, 212, 0.815));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    
+    /* Жирный черный ободок сверху и снизу для стиля */
+    border-top: 1px solid #0239ee5b;
+    border-bottom: 2px solid #001aff67;
+    
+    /* Тень для объема */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+        }
+
+    .new-text   {
+    letter-spacing: 1px; /* Сближаем буквы для "плотного" вида */
+    font-size: 15px;  /* Чуть больше для лучшей читаемости */
+    color: #000;         /* Контрастный черный текст */
+    }  
+    
+
+.version-badge { background: rgba(59, 88, 129, 0.637); color: #00d9ffb7; }
+.beta-badge    { background: rgba(0, 210, 255, 0.15); color: var(--accent-blue); border-color: var(--accent-blue); }
